@@ -14,6 +14,12 @@ class Location:
     def addMonsters(self, monster):
         self.monsters.append(monster)
 
+    def checkForMonsters(self):
+        if(len(self.monsters) > 0):
+            return "You have encountered " + self.monsters[0].name + " "
+        else:
+            return ""
+
     def pickUpItem(self, item):
         self.items.remove(item)
         return item
@@ -64,15 +70,13 @@ dining_room.east = bedroom
 dining_room.west = bathroom
 dining_room.south = porch
 
-print(dining_room.description)
+print("Welcome to your worst nightmare, press enter to continue")
 
 current_location = dining_room
 
 response = ''
 while response != 'quit':
-    response = input('You see ' + current_location.description)
-    if(len(current_location.monsters) > 0):
-        print("You have encountered " + current_location.monsters[0].name)
+    response = input('You see ' + current_location.description + "\n" + current_location.checkForMonsters())
     if response == "north":
         current_location = current_location.north
     elif response == 'south':
